@@ -116,7 +116,7 @@ calculateBudget: function() {
     calculateTotal('inc');
 
     // calculate the budget: income - expenses
-    
+ 
 data.budget = data.totals.inc - data.totals.exp;
 if (data.totals.inc < data.totals.exp){
 alert('Check your input value, Expenses is more than your income (Overbudget)');
