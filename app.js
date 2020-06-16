@@ -261,6 +261,14 @@ newHtml = newHtml.replace('%value%', obj.value);
 
 },
 
+
+deleteListItem: function (selectorID) {
+    
+    var el = document.getElementById(selectorID)
+    el.parentNode.removeChild(el)
+
+},
+
 clearFields: function(){
 var fields, fieldsArr;
 
@@ -372,6 +380,8 @@ updateBudget();
 
 };
 
+
+
 var ctrlDelItem = function(event) {
 var itemID;
 
@@ -391,11 +401,11 @@ var itemID;
     // 1. Delete the item from data structure
     budgetCtrl.deleteItem(type, ID);
 
-    // 2. Delete the item from yhe UI
-
+    // 2. Delete the item from the UI
+    UICtrl.deleteListItem(itemID);
     
     // 3. Update and show the new budget 
-
+    updateBudget();
 
   }
 
