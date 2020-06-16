@@ -1,2 +1,2 @@
 # Budgety-App
-This app is used for budget. Calculate your income and expenses on the web app
+This app is use for calculating budget base on incomes and expenses. It also gives percentage for each input of income and expenses.  NOTE: The enter key also works for input confirmation
