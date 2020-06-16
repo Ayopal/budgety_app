@@ -38,7 +38,9 @@ totals: {
 
 budget: 0,
 
-percentage : -1
+percentage : -1,
+
+eachPercentage: -1
 
 };
 
@@ -278,7 +280,7 @@ var fields, fieldsArr;
 
     fieldsArr.forEach(function(current){
   current.value = "";
-
+ 
 });
 
     fieldsArr[0].focus();
