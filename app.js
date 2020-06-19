@@ -177,7 +177,6 @@ percentage: data.percentage
 }
 },
 
-
  //ClearBudget on the UI
 getBudgetInit: function () {
     return {
