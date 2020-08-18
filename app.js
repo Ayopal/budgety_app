@@ -30,6 +30,8 @@ var Income = function(id, description, value) {
     this.value = value;
     };
 
+
+
 var calculateTotal = function(type){
 var sum = 0;
 data.allItems[type].forEach(function(cur) {
@@ -56,7 +58,6 @@ budget: 0,
 
 percentage : -1,
 
-eachPercentage: -1
 
 };
 
@@ -136,13 +137,15 @@ calculateBudget: function() {
     // calculate the budget: income - expenses
  
 data.budget = data.totals.inc - data.totals.exp;
+
+
 if (data.totals.inc < data.totals.exp){
 alert('Check your input value, Expenses is more than your income (Overbudget)');
 
 }
     // calculate the percentage of income that we spent 
 
-    if(data.totals.inc > 0) {
+    if (data.totals.inc > 0) {
         data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100) + '%';
     } else {
         data.percentage = -1;
@@ -152,11 +155,11 @@ alert('Check your input value, Expenses is more than your income (Overbudget)');
 
 calculatePercentages: function () {
 
-    data.allItems.exp.forEach(function (cur) {
+    data.allItems.exp.forEach(function(cur) {
 
         cur.calcPercentage(data.totals.inc);
 
-    })
+    });
 },
 
 getPercentages: function() {
@@ -325,11 +328,18 @@ displayBudget: function(obj){
     document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalInc;
     document.querySelector(DOMStrings.expensesLabel).textContent = obj.totalExp;
    
-    if(obj.percentage > 0) {
-        document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage;
+    if (obj.percentage > 0) {
+        document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage  + "%";
     } else {
-        document.querySelector(DOMStrings.percentageLabel).textContent = '---'
+        document.querySelector(DOMStrings.percentageLabel).textContent = '---';
     }
+
+},
+
+
+displayPercentages: function(percentages) {
+
+
 
 },
 
@@ -382,9 +392,9 @@ budgetCtrl.calculatePercentages();
     // 2. Read Percentages form budget controller
 var percentages = budgetCtrl.getPercentages();
     // 3. Update the UI with new percentages
-
+console.log(percentages);
     
-}    
+};    
 
 
 var updateBudget = function(){
