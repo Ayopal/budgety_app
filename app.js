@@ -146,12 +146,13 @@ alert('Check your input value, Expenses is more than your income (Overbudget)');
     // calculate the percentage of income that we spent 
 
     if (data.totals.inc > 0) {
-        data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100) + '%';
+        data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
     } else {
         data.percentage = -1;
     }
 
 }, 
+
 
 calculatePercentages: function () {
 
@@ -161,6 +162,7 @@ calculatePercentages: function () {
 
     });
 },
+
 
 getPercentages: function() {
 
@@ -329,7 +331,7 @@ displayBudget: function(obj){
     document.querySelector(DOMStrings.expensesLabel).textContent = obj.totalExp;
    
     if (obj.percentage > 0) {
-        document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage  + "%";
+        document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + '%';
     } else {
         document.querySelector(DOMStrings.percentageLabel).textContent = '---';
     }
@@ -385,16 +387,6 @@ var controller = ( function (budgetCtrl, UICtrl) {
 
     };
 
-var upatePercentages = function() {
-
-    // 1. Calculate Percentages
-budgetCtrl.calculatePercentages();
-    // 2. Read Percentages form budget controller
-var percentages = budgetCtrl.getPercentages();
-    // 3. Update the UI with new percentages
-console.log(percentages);
-    
-};    
 
 
 var updateBudget = function(){
@@ -408,7 +400,20 @@ var budget = budgetCtrl.getBudget();
 // 3. Display the budget on the UI
 UICtrl.displayBudget(budget);       
 
-    };
+};
+
+
+var updatePercentages = function() {
+
+    // 1. Calculate Percentages
+budgetCtrl.calculatePercentages();
+    // 2. Read Percentages form budget controller
+var percentages = budgetCtrl.getPercentages();
+    // 3. Update the UI with new percentages
+console.log(percentages);
+    
+};    
+
 
 
 var ctrlAddItem = function() {
@@ -433,7 +438,7 @@ UICtrl.clearFields();
 updateBudget();
 
 // 6. Calculaate and Update Percentages
-upatePercentages();
+updatePercentages();
 
 }
 
@@ -467,7 +472,7 @@ var itemID;
     updateBudget();
 
     // 4. Calculaate and Update Percentages
-    upatePercentages();
+    updatePercentages();
 
   }
 
