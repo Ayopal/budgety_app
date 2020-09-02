@@ -15,7 +15,7 @@ Expense.prototype.calcPercentage = function (totalIncome) {
         this.percentage = Math.round((this.value / totalIncome) * 100);
     } else {
         this.percentage = -1;
-    }
+    } 
 
 };
 
@@ -243,7 +243,8 @@ var DOMStrings = {
     incomeLabel: ".budget__income--value",
     expensesLabel:   ".budget__expenses--value",
     percentageLabel: ".budget__expenses--percentage",
-    container : '.container'
+    container : '.container',
+    expensesPercLabel: ".item__percentage"
 
 }
 
@@ -341,7 +342,22 @@ displayBudget: function(obj){
 
 displayPercentages: function(percentages) {
 
-/*yyyy*/
+var fields = document.querySelectorAll(DOMStrings.expensesPercLabel);
+
+var nodeListForEach = function(list, callback) {
+for (var i = 0; i < list.length; i++) {
+    callback(list[i], i);
+}
+}; 
+
+nodeListForEach(fields, function(current, index){
+
+    if (percentages[index] > 0) {
+        current.textContent = percentages[index] + '%';
+    } else {
+        current.textContent = '---';
+    }
+});
 
 },
 
@@ -353,7 +369,7 @@ getDOMstrings: function() {
 
 })();
 
-
+  
 
 
 
@@ -410,7 +426,7 @@ budgetCtrl.calculatePercentages();
     // 2. Read Percentages form budget controller
 var percentages = budgetCtrl.getPercentages();
     // 3. Update the UI with new percentages
-console.log(percentages);
+UICtrl.displayPercentages(percentages);
     
 };    
 
