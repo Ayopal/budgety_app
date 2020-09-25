@@ -377,10 +377,6 @@ if (int.length > 3) {
      
 }
 
-
-
-
-
 dec = numSplit[1];
 
 },
