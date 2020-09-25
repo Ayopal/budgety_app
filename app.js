@@ -358,6 +358,30 @@ nodeListForEach(fields, function(current, index){
         current.textContent = '---';
     }
 });
+ 
+},
+
+
+formatNumber: function (num, type) {
+var numSplit, int, dec;
+
+
+num = Math.abs(num);
+num = num.toFixed(2);    
+
+numSplit = num.split('.')
+
+int = numSplit[0];
+if (int.length > 3) {
+    int = init.substr(0, init.length -3) + ',' + init.substr(int.length - 3, 3);
+     
+}
+
+
+
+
+
+dec = numSplit[1];
 
 },
 
