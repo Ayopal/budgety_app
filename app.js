@@ -248,6 +248,25 @@ var DOMStrings = {
 
 }
 
+var formatNumber = function (num, type) {
+    var numSplit, init, dec;
+    
+    
+    num = Math.abs(num);
+    num = num.toFixed(2);    
+    
+    numSplit = num.split('.')
+    
+    init = numSplit[0];
+    if (init.length > 3) {
+    init = init.substr(0, init.length -3) + ',' + init.substr(init.length - 3, 3);      
+    }
+     
+    dec = numSplit[1];
+    return (type === 'exp' ? '-' : '+') + '' + init + '.' + dec;
+    
+    };
+
 return {
 getInput: function() {
     return {
@@ -273,27 +292,21 @@ element = DOMStrings.expensesContainer;
 html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
 }
 
-
 //Replace the placeholder text with some actual data
-
 newHtml = html.replace('%id%', obj.id);
 newHtml = newHtml.replace('%description%', obj.description);
-newHtml = newHtml.replace('%value%', obj.value);
+newHtml = newHtml.replace('%value%', formatNumber(obj.value, type));
 
 
 //Insert the html in UI
-
 /**verification of position name
 <!---beforebegin--//  JS CODE>
 <p>
  <!---afterbegin--> // JS CODE
-
  ----------------------------------------------------------
-
 <!---beforeend--> // JS CODE
 </p>
 <!---aftereend--> // JS CODE
- 
  **/
 
     document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
@@ -322,23 +335,22 @@ var fields, fieldsArr;
 });
 
     fieldsArr[0].focus();
-
 },
 
 displayBudget: function(obj){
+    var type;
+    obj.budget > 0 ? type = 'inc' : type = 'exp';
 
-    document.querySelector(DOMStrings.budgetLabel).textContent = obj.budget;
-    document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalInc;
-    document.querySelector(DOMStrings.expensesLabel).textContent = obj.totalExp;
+    document.querySelector(DOMStrings.budgetLabel).textContent = formatNumber(obj.budget, type);
+    document.querySelector(DOMStrings.incomeLabel).textContent = formatNumber(obj.totalInc, 'inc');
+    document.querySelector(DOMStrings.expensesLabel).textContent = formatNumber(obj.totalExp, 'exp');
    
     if (obj.percentage > 0) {
         document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + '%';
     } else {
         document.querySelector(DOMStrings.percentageLabel).textContent = '---';
     }
-
 },
-
 
 displayPercentages: function(percentages) {
 
@@ -361,39 +373,14 @@ nodeListForEach(fields, function(current, index){
  
 },
 
-
-formatNumber: function (num, type) {
-var numSplit, int, dec;
-
-
-num = Math.abs(num);
-num = num.toFixed(2);    
-
-numSplit = num.split('.')
-
-int = numSplit[0];
-if (int.length > 3) {
-    int = init.substr(0, init.length -3) + ',' + init.substr(int.length - 3, 3);
-     
-}
-
-dec = numSplit[1];
-
-},
-
 getDOMstrings: function() {
         return DOMStrings; 
     }
-
 }
 
 })();
 
   
-
-
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
