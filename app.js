@@ -391,13 +391,17 @@ changedType: function() {
     var fields = document.querySelectorAll(
         DOMStrings.inputType + ',' +
         DOMStrings.inputDescription + ',' +
-        DOMStrings.inputValue
+        DOMStrings.inputValue 
+    
     );
 
     nodeListForEach(fields, function(cur) {
         cur.classList.toggle('red-focus');
 
     }); 
+    
+    document.querySelector(DOMStrings.inputBtn).classList.toggle('red');
+
 },
 
 getDOMstrings: function() {
