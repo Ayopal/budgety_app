@@ -222,8 +222,6 @@ testing: function(){
 
 
 
-
-
 //UI CONTROLLER
 var UIController = (function() {
 
@@ -262,6 +260,15 @@ var formatNumber = function (num, type) {
     return (type === 'exp' ? '-' : '+') + '' + init + '.' + dec;
     
     };
+
+//Making it accessible by other methods and function.  It is still a private function
+
+var nodeListForEach = function(list, callback) {
+    for (var i = 0; i < list.length; i++) {
+        callback(list[i], i);
+    }
+    }; 
+
 
 return {
 getInput: function() {
@@ -326,7 +333,7 @@ var fields, fieldsArr;
     fieldsArr = Array.prototype.slice.call(fields);
  
     fieldsArr.forEach(function(current){
-  current.value = "";
+  current.value = " ";
  
 });
 
@@ -351,12 +358,6 @@ displayBudget: function(obj){
 displayPercentages: function(percentages) {
 
 var fields = document.querySelectorAll(DOMStrings.expensesPercLabel);
-
-var nodeListForEach = function(list, callback) {
-for (var i = 0; i < list.length; i++) {
-    callback(list[i], i);
-}
-}; 
 
 nodeListForEach(fields, function(current, index){
 
@@ -383,6 +384,22 @@ textContent = months[month] + ', ' + year;
 
 },
 
+
+
+changedType: function() {
+
+    var fields = document.querySelectorAll(
+        DOMStrings.inputType + ',' +
+        DOMStrings.inputDescription + ',' +
+        DOMStrings.inputValue
+    );
+
+    nodeListForEach(fields, function(cur) {
+        cur.classList.toggle('red-focus');
+
+    }); 
+},
+
 getDOMstrings: function() {
         return DOMStrings; 
     }
@@ -407,6 +424,7 @@ var controller = ( function (budgetCtrl, UICtrl) {
         var DOM = UICtrl.getDOMstrings();
 
         document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
+        document.querySelector(DOM.inputType).addEventListener('change', UICtrl.changedType);
         
         document.addEventListener('keypress', function(event) {
         if (event.keycode === 13 || event.which === 13) {
@@ -519,9 +537,10 @@ init: function() {
 
     setUpEventListeners();
 
-    //ClearBudget on the UI
+    //ClearBudget and Input on the UI
    var clearBudget = budgetCtrl.getBudgetInit();
    UICtrl.displayBudget(clearBudget);
+   UICtrl.clearFields();
 
 },
 
